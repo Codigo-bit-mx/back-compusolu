@@ -13,13 +13,12 @@ export const all_empresas = async (req: Request, res: Response) => {
       select:'tipo'
      }).lean()
 
-    await disconnect()
+    // await disconnect()
      
     res.status(200).json({
      consulta  
     })
   } catch (error) {
-    console.log(error)
     res.status(400).json({msg: 'Se obtuvo un error'})
   }
 }

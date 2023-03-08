@@ -26,12 +26,11 @@ export const conexion = async() => {
 
 
 export const disconnect = async () => {
-    if(process.env.NODE_ENV === 'development') return
 
+    if(process.env.NODE_ENV === 'development') return
     if(mongoConnected.isConnect === 0){
         return
     }
-
     await mongoose.disconnect()
     console.log("Desconectado de MONGODB")
 } 

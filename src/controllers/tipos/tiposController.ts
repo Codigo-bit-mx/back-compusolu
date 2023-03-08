@@ -1,6 +1,5 @@
 import { Request, Response } from "express";
 import { tipos } from "../../models/tipos/tiposModel"
-import { Tipo} from '../../interfaces'
 import { conexion, disconnect } from "../../database/config";
 
 export const obtener_tipos = async(req: Request, res: Response) => {
@@ -8,7 +7,7 @@ export const obtener_tipos = async(req: Request, res: Response) => {
     try {    
        await conexion()
         const tiposall = await tipos.find().sort({tipo: 1})  
-       await disconnect()
+    //    await disconnect()
 
        res.status(200).json({
             tiposall
