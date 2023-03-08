@@ -8,11 +8,11 @@ export const obtener_tipos = async(req: Request, res: Response) => {
     try {    
        await conexion()
         const tiposall = await tipos.find().sort({tipo: 1})  
+       await disconnect()
 
        res.status(200).json({
             tiposall
        })
-       await disconnect()
     } catch (error) {
         res.status(400).json({
             msg: 'No se guardo el tipo de empresa'
