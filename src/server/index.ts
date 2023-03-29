@@ -50,7 +50,7 @@ export class Server {
     }
 
     listen() {
-        this.server.listen( this.port, this.address, () => {
+        this.server.listen( this.port, () => {
             console.log("Servidor corriendo en",this.address,':',this.port);
         })
     }
