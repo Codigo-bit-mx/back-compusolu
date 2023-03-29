@@ -29,6 +29,7 @@ export const addEmpresa = async (req: Request, res:Response) => {
    const {nombre, fecha, tipo, comentario} = req.body
   
    try {
+    
     if( nombre === '' || fecha === '' || tipo === '' ) {
       return res.status(400).json({msg:'Todos los campos son obligatorios'})
     }
