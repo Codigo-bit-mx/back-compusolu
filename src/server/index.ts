@@ -1,26 +1,24 @@
 import express, {Express} from 'express'
-import fs          from 'fs'
 import cors       from 'cors'
-import {conexion} from '../database/config'
 import http       from 'http'
 import fileUpload from 'express-fileupload'
+
 
 export class Server {
     app: Express 
     port: string 
     address: string 
     server: any 
-    empresas: string
-    tipos: string
-  
+    llamaindex: string 
+    openai:string
 
     constructor() {
         this.app = express()
         this.port        = process.env.PORT!
 	    this.address	 = process.env.IP!
         this.server      = http.createServer( this.app )
-        this.empresas    = '/api/empresas'
-        this.tipos       = '/api/tipos'       
+        this.llamaindex  = '/api/llamaindex'       
+        this.openai      = '/api/openai'
         this.conectarBD()
         this.middleware()
         this.routes()
@@ -28,7 +26,7 @@ export class Server {
     }
 
     conectarBD() {
-        conexion();
+        // initializeMySQL(); // configura alguna conexión a base de datos
     }
 
     middleware() {
@@ -40,13 +38,12 @@ export class Server {
             tempFileDir: '/tmp/', 
             createParentPath: true
         }))
-        // this.app.use( this.upload.single('file'));
+        
     }
 
     routes() {
-        this.app.use( this.empresas, require('../routes/empresas'))
-        this.app.use( this.tipos, require('../routes/tipos'))
-       
+        this.app.use( this.llamaindex, require('../routes/llamaindex'))
+        this.app.use( this.openai, require('../routes/openai'))
     }
 
     listen() {
@@ -55,7 +52,3 @@ export class Server {
         })
     }
 }
-
-
-
-// module.exports = Server;

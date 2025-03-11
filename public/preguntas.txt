@@ -1,0 +1,46 @@
+Crea y respóndeme con solo un objeto JSON válido, con las mejores prácticas y estándares, que pueda ser analizado correctamente utilizando la función JSON.parse() en JavaScript y que cumpla con las siguientes características:
+    La información del JSON deberá ser relacionada a un proceso de '@nameParameter', teniendo en cuenta las siguientes propiedades:
+        1. "name": Nombre del proceso de autorización (Por ejemplo: Solicitud de vacaciones, Solicitud de compra, Solicitud de vacante, etc.)
+        2. "description": descripción detallada del proceso de autorización, genera mucha información para que sea más fácil para el usuario entender el proceso (máximo 1275 caracteres)
+        3. "printable": Un valor booleano (0 o 1) que indica si el formulario del proceso es imprimible (1) o no (0), normalmente deberá ser 1
+        4. "show_in_organization_chart": Un valor booleano (0 o 1) que indica si el proceso debe mostrarse en el organigrama (1) o no (0), normalmente será 1
+        5. "visible": Un valor booleano (0 o 1) que indica si el proceso es visible (1) o no (0), normalmente será 1
+        6. "inputs": Un array de campos o inputs del formulario que contiene objetos con las siguientes propiedades:
+            6.1 "show_order": Orden en el que se mostrará el input (número entero consecutivo que no se repite)
+            6.2 "input_name": Nombre del input fácil de entender para que el usuario pueda llenar el campo
+            6.3 "input_id": Tipo de input (1-17, basado en los siguientes tipos:
+                6.3.1 input_id: 1: Texto corto (input para texto de máximo 255 caracteres)
+                6.3.2 input_id: 2: Texto largo (input para texto de máximo 2250 caracteres)
+                6.3.3 input_id: 3: Lista con opciones seleccionables (es un objeto con dos propiedades: "options" y "optionsString". "options" es array de opciones string separadas por coma y con comillas dobles, ejemplo: "options": ["Computadora portátil", "Proyector", "Cámara de video", "Ninguno"] "optionsString" es un string con las opciones en un solo string separadas por coma, ejemplo: "optionsString": "Computadora portátil, Proyector, Cámara de video, Ninguno" inspirate en estos ejemplos para crear tu propuesta. Es obligatorio que al menos coloques una opción en la propiedad "options" y "optionsString", para ambas propiedades deben existir las mismas opciones)
+                6.3.4 input_id: 4: Correo electrónico (input type="email")
+                6.3.5 input_id: 5: Número telefónico (input type="tel")
+                6.3.6 input_id: 6: Liga o URL (input type="url")
+                6.3.7 input_id: 7: Contraseña o información oculta (input type="password")
+                6.3.8 input_id: 8: Mes del año (input type="month")
+                6.3.9 input_id: 9: Hora (hh:mm am/pm) (input type="time")
+                6.3.10 input_id: 10: Solo números enteros (input type="number")
+                6.3.11 input_id: 11: Checkbox (input type="checkbox")
+                6.3.12 input_id: 12: Fecha (día, mes y año) (input type="date" que usa un componente para seleccionar una fecha formato dd/mm/aaaa)
+                6.3.13 input_id: 14: Dinero (input type="number" que formatea el número como dinero)
+                6.3.14 input_id: 15: Anexo menor a 50 MB (un input de tipo file que permite anexar archivos hasta por 50 mb excepto .exe)
+                6.3.15 input_id: 16: Fechas múltiples (input que usa un componente para seleccionar varias fechas con formato dd/mm/aaaa)
+                6.3.16 input_id: 17: Tabla (un input que permite crear una tabla con varios renglones en donde puedes especificar las columnas en la propiedad "options" separadas por coma))
+            6.4 "input_id_name": Nombre del tipo de input
+            6.5 "options": (si aplica) Array con opciones entre corchetes, usando comillas dobles, separdas por coma para el tipo de input id 3 (lista de opciones seleccionables) y 17 (tabla), ejemplo: ["Tipo 1","Tipo 2","Tipo 3"]
+            6.6 "optionsString": (si aplica) String con opciones seleccionables, separadas por coma
+            6.7 "required": Un valor booleano (0 o 1) que indica si el input es obligatorio (1) o no (0)
+            6.8 "visible": Un valor booleano (0 o 1) que indica si el input es visible (1) o no (0), siempre será 1
+        Genera varias opciones de inputs, no incluyas campos con datos personales del solicitante como "Nombre de empleado", "Nombre del solicitante" o datos de contacto para los formularios.
+        7. "authorization_flow": Un array que contiene objetos con las siguientes propiedades:
+            7.1 "show_order": Orden en el que se llevará a cabo el proceso de autorización (número entero consecutivo que no se repite)
+            7.2 "authorization_flow_type_id": Tipo de autorización (4-6, basado en las siguientes opciones: 
+                7.2.1 authorization_flow_type_id: 4: Supervisor directo (autoriza el jefe directo del empleado que hace la solicitud)
+                7.2.2 authorization_flow_type_id: 5: Supervisor de 2do nivel (autoriza el jefe del jefe del empleado que hace la solicitud)
+                7.2.3 authorization_flow_type_id: 6: Supervisor de 3er nivel (autoriza el jefe del jefe del jefe del empleado que hace la solicitud))
+            No es necesario tener los 3 niveles de autorización, para la mayoría de los casos utiliza solamente el authorization_flow_type_id 4
+            Es muy importancia que no agregues otros tipos de nivel de autorización que no sean los mencionados anteriormente 4, 5 y 6.
+            7.3 "authorization_flow_type": Nombre del tipo de autorización según las opciones entregadas anteriormente)
+        8. "rejection_reasons": Un array que contiene objetos con la siguiente propiedad:
+            8.1 "rejection_reason": Lista de los posibles motivos de rechazo para el formulario en el proceso de revisión, establecer al menos 3 y dejar uno genérico llamado “Otro”
+    Favor de responderme solo el objeto JSON con la mayor información posible para poder copiar y pegarlo directamente en mi función JSON.parse y convertirlo en un objeto válido de JavaScript.
+ 
